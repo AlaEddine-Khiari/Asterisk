@@ -23,7 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build 'asterisk-image:latest', '-f pipeline/Dockerfile .'
+                    docker.build 'asterisk-image:latest', '-f Pipeline/Dockerfile .'
                 }
             }
         }
@@ -31,8 +31,9 @@ pipeline {
         stage('Unit Tests Python') {
             steps {
                 script {
-                    // Run tests inside Docker container
-                    def testResult = sh(returnStatus: true, script: 'python3 pipeline/Test/image_test.py')
+                    def testResult = docker.image('asterisk-image:latest').inside {
+                        return sh(returnStatus: true, script: 'python3 Pipeline/Test/image_test.py')
+                    }
                     if (testResult != 0) {
                         error 'Tests failed! Aborting pipeline...'
                     }
@@ -48,7 +49,7 @@ pipeline {
                     
                     // Copy the files from the volume mountpoint to the local machine
                     sh "cp ${mountpoint}/sip.conf /home/vagrant/Asterisk_Volume"
-                    sh "cp ${mountpoint}/other_file.conf /home/vagrant/Asterisk_Volume"
+                    sh "cp ${mountpoint}/voicemail.conf /home/vagrant/Asterisk_Volume"
                 }
             }
         }
@@ -61,3 +62,4 @@ pipeline {
         }
     }
 }
+

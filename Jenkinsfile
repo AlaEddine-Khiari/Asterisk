@@ -12,14 +12,6 @@ pipeline {
             }
         }
 
-        stage('Clean Project') {
-            steps {
-                script {
-                    sh 'make clean'
-                }
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {

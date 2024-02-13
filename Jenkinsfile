@@ -15,11 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                   def dockerImage = docker.build("asterisk-image:latest", ".")
-                   // Check if dockerImage is null or an error occurred during the build
-                   if (dockerImage == null) {
-                       error "Docker image build failed"
-                   }
+                  sh "docker build -t asterisk-image:latest ."
                 }
             }
         }
@@ -38,7 +34,6 @@ pipeline {
                 }
             }
         }
-    }
 
     post {
         always {

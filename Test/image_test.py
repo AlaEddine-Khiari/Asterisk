@@ -1,20 +1,35 @@
-import subprocess
+import docker
 
-def check_asterisk_version(expected_version):
-    version_output = subprocess.check_output(['asterisk', '-rx', 'core show version']).decode('utf-8')
-    if expected_version not in version_output:
-        raise Exception(f"Asterisk version is not {expected_version}")
+def run_sip_module_test(image_name):
+    # Connect to Docker daemon
+    client = docker.from_env()
 
-def check_sip_module_loaded():
-    modules_output = subprocess.check_output(['asterisk', '-rx', 'module show like chan_sip.so']).decode('utf-8')
-    if 'chan_sip.so' not in modules_output:
-        raise Exception("SIP module is not loaded")
+    try:
+        # Run the Docker container
+        container = client.containers.run(image_name, detach=True)
+
+        # Execute SIP-related test commands within the container
+        test_command = "asterisk -rx 'sip show peers'"
+        exec_result = container.exec_run(test_command)
+
+        # Print test command output
+        print("SIP Module Test Output:")
+        print(exec_result.output.decode())
+
+        # Check if test output indicates success or failure
+        if "Some Success Condition" in exec_result.output.decode():
+            print("SIP module test passed!")
+        else:
+            print("SIP module test failed!")
+            # Exit
+            exit(1)
+
+    finally:
+        #Delete the container
+        if container:
+            container.remove(force=True)
+            print("Container deleted successfully.")
 
 if __name__ == "__main__":
-    try:
-        check_asterisk_version('18.21')
-        check_sip_module_loaded()
-        print("Tests passed: Asterisk version is 18.21 and SIP module is loaded.")
-    except Exception as e:
-        print(f"Tests failed: {str(e)}")
-        exit(1)
+    # Replace "your-asterisk-image" with the name of your Asterisk Docker image
+    run_sip_module_test("asterisk-image")

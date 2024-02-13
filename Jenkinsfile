@@ -30,10 +30,10 @@ pipeline {
                     def mountpoint = sh(script: "docker inspect --format='{{ range .Mounts }}{{ .Source }}{{ end }}' container_name", returnStdout: true).trim()
                     // Check if mountpoint is not empty before copying files
                     if (mountpoint) {
-                        sh "cp ${mountpoint}/sip.conf /home/vagrant/Asterisk_Volume"
-                        sh "cp ${mountpoint}/other_file.conf /home/vagrant/Asterisk_Volume"
+                        sh "cp sip.conf /home/vagrant/Asterisk_Volume"
+                        sh "cp other_file.conf /home/vagrant/Asterisk_Volume"
                     } else {
-                        error "Failed to determine container mountpoint"
+                        error "Failed to determine the copy"
                     }
                 }
             }

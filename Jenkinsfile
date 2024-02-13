@@ -40,7 +40,7 @@ pipeline {
                     } else {
                         echo "SIP module test failed!"
                          //delete the Docker image if the test fails
-                        sh "docker rmi -f your-asterisk-image"
+                        sh "docker rmi -f asterisk-image:latest"
                     }
                 }
             }
@@ -54,26 +54,28 @@ pipeline {
             }
        }     
     }
-   post {
-    always {
-        script {
-            def subject = "Build ${currentBuild.result}: ${env.JOB_NAME}"
-            def body = ""
+    
+    post {
+        always {
+            script {
+                def subject = "Build ${currentBuild.result}: ${env.JOB_NAME}"
+                def body = ""
 
-            if (currentBuild.result == 'SUCCESS') {
-                body += "The pipeline was successful.\n"
-                body += "Docker image was created successfully.\n"
-            } else {
-                body += "The pipeline failed.\n"
-                body += "Error: ${currentBuild.rawBuild.log}\n" // Include error message from Jenkins build log
+                if (currentBuild.result == 'SUCCESS') {
+                    body += "The pipeline was successful.\n"
+                    body += "Docker image was created successfully.\n"
+                } else {
+                    body += "The pipeline failed.\n"
+                    body += "Error: ${currentBuild.rawBuild.log}\n" // Include error message from Jenkins build log
+                }
+
+                emailext(
+                    subject: subject,
+                    body: body,
+                    to: "khiarialaa@gmail.com"
+                )
             }
-
-            emailext(
-                subject: subject,
-                body: body,
-                to: "khiarialaa@gmail.com"
-            )
+            cleanWs() // clean workspace
         }
-        cleanWs() // clean workspace
     }
 }

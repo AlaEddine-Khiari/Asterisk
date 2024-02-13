@@ -36,8 +36,8 @@ pipeline {
 
                     // Handle script exit code
                     if (scriptExitCode != 0) {
+                        sh "docker rmi -f asterisk-image"
                         error "Test Failed!"
-                       sh "docker rmi -f asterisk-image:latest"
                     }
                 }
             }

@@ -34,7 +34,7 @@ pipeline {
                 }
             }
         }
-
+    }
     post {
         always {
             // Send email notification
@@ -42,4 +42,4 @@ pipeline {
         }
     }
  }
-}
+

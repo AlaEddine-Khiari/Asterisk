@@ -39,8 +39,6 @@ pipeline {
                         echo "SIP module test passed!"
                     } else {
                         echo "SIP module test failed!"
-                         //delete the Docker image if the test fails
-                        sh "docker rmi -f asterisk-image:latest"
                     }
                 }
             }

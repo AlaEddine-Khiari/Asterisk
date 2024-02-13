@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                         sh "cp sip.conf /home/vagrant/Asterisk_Volume"
-                        sh "cp other_file.conf /home/vagrant/Asterisk_Volume"
+                        sh "cp voicemail.conf /home/vagrant/Asterisk_Volume"
                 }
             }
         }

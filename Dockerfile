@@ -23,7 +23,7 @@ COPY ./ari.conf /etc/asterisk/ari.conf
 COPY ./http.conf /etc/asterisk/http.conf
 COPY ./queues.conf /etc/asterisk/queues.conf
 COPY ./voicemail.conf /etc/asterisk/voicemail.conf
-
+COPY Test/image_test.py /app/Test/image_test.py
 # Expose Asterisk ports
 EXPOSE 5060/udp 5060/tcp
 EXPOSE 8088

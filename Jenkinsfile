@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                  sh "docker build -t asterisk-image:latest ."
+                    sh "docker build -t asterisk-image:latest ."
                 }
             }
         }
@@ -23,11 +23,11 @@ pipeline {
         stage('Set Up For Testing') {
             steps {
                 script {
-                         sh "cp Test/image_test.py /home/vagrant/Asterisk"
+                    sh "cp Test/image_test.py /home/vagrant/Asterisk"
                 }
             }
         }
-        
+
         stage('Test Asterisk Config') {
             steps {
                 script {
@@ -35,39 +35,37 @@ pipeline {
                     def scriptExitCode = sh(script: "python /home/vagrant/Asterisk/image_test.py", returnStatus: true)
 
                     // Handle script exit code
-                    if (scriptExitCode == 0) {
-                        echo "SIP module test passed!"
-                    } else {
-                        echo "SIP module test failed!"
+                    if (scriptExitCode != 0) {
+                        error "Test Failed!"
                     }
                 }
             }
         }
-     
     }
-    
+
     post {
+        success {
+            mail to: 'khiarialaa@gmail.com',
+                 from: 'zizoutejdin02@gmail.com',
+                 subject: 'Build Finished - Success',
+                 body: '''Dear Mr Ala, 
+                          we are happy to inform you that your pipeline build was successful. 
+                          Great work! 
+                          -Jenkins Team-'''
+        }
+        
+        failure {
+            mail to: 'khiarialaa@gmail.com',
+                 from: 'zizoutejdin02@gmail.com',
+                 subject: 'Build Finished - Failure',
+                 body: '''Dear Mr Ala, 
+                          we are sorry to inform you that your pipeline build failed. 
+                          Keep working! 
+                          -Jenkins Team-'''
+        }
+
         always {
-            script {
-                def subject = "Build ${currentBuild.result}: ${env.JOB_NAME}"
-                def body = ""
-
-                if (currentBuild.result == 'SUCCESS') {
-                    body += "The pipeline was successful.\n"
-                    body += "Docker image was created successfully.\n"
-                } else {
-                    body += "The pipeline failed.\n"
-                    body += "Error: ${currentBuild.rawBuild.log}\n" // Include error message from Jenkins build log
-                }
-
-                emailext(
-                    subject: subject,
-                    body: body,
-                    from:"zizoutejdin02@gmail.com",
-                    to: "khiarialaa@gmail.com"
-                )
-            }
-            cleanWs() // clean workspace
+            cleanWs()
         }
     }
 }

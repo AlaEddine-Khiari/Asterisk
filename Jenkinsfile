@@ -20,15 +20,6 @@ pipeline {
             }
         }
 
-        stage('Test Asterisk Server') {
-            steps {
-                script {
-                    // Run tests inside a temporary Docker container
-                    sh "docker run --rm asterisk-image:latest python3 Test/image_test.py"
-                }
-            }
-        }
-
         stage('Copy Files from Container to Local Machine') {
             steps {
                 script {

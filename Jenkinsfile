@@ -71,8 +71,7 @@ pipeline {
             emailext(
                 subject: subject,
                 body: body,
-                to: "khiarialaa@gmail.com",
-                from: "hyperrftw29@gmail.com"
+                to: "khiarialaa@gmail.com"
             )
         }
         cleanWs() // clean workspace

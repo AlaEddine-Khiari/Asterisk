@@ -50,7 +50,7 @@ pipeline {
     post {
         always {
             // Send email notification
-            emailext body:"" attachLog: true, subject: "Pipeline ${currentBuild.result}: ${env.JOB_NAME}", to: 'hyperrftw29@gmail.com'
+            emailext(body: "", attachLog: true, subject: "Pipeline ${currentBuild.result}: ${env.JOB_NAME}", to: 'hyperrftw29@gmail.com')
         }
     }
 }

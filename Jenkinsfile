@@ -23,8 +23,6 @@ pipeline {
         stage('Set Up For Testing') {
             steps {
                 script {
-                         sh "mkdir -p /home/vagrant/Asterisk" 
-                         sh "chmod u+w /home/vagrant/Asterisk"
                          sh "cp Test/image_test.py /home/vagrant/Asterisk"
                 }
             }

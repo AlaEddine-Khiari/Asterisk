@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build 'asterisk-image:latest', '-f Pipeline/Dockerfile .'
+                    docker.build("asterisk-image:latest", "-f Pipeline/Dockerfile .")
                 }
             }
         }

@@ -63,7 +63,7 @@ pipeline {
                 emailext(
                     subject: subject,
                     body: body,
-                    from:"zizoutejdin02@gmail.com"
+                    from:"zizoutejdin02@gmail.com",
                     to: "khiarialaa@gmail.com"
                 )
             }

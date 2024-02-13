@@ -41,4 +41,5 @@ pipeline {
             emailext(body: "", attachLog: true, subject: "Pipeline ${currentBuild.result}: ${env.JOB_NAME}", to: 'hyperrftw29@gmail.com')
         }
     }
+ }
 }

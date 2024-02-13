@@ -1,4 +1,4 @@
-#toget isnide the container exec ... /bin/sh
+#!/bin/sh
 
 # Set default user to run Asterisk as (defaults to 'asterisk')
 ASTERISK_USER=${ASTERISK_USER:-asterisk}
@@ -24,7 +24,7 @@ if [ "${ASTERISK_UID}" != "" ] && [ "${ASTERISK_GID}" != "" ]; then
   adduser --gecos "" --no-create-home --uid ${ASTERISK_UID} --disabled-password ${ASTERISK_USER} || exit
 
   # Change ownership of directories to match new UID and GID
-  chown -R ${ASTERISK_UID}:${ASTERISK_UID} /etc/asterisk \
+  chown -R ${ASTERISK_UID}:${ASTERISK_GID} /etc/asterisk \
                                            /var/*/asterisk \
                                            /usr/*/asterisk
 fi

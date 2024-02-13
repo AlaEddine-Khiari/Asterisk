@@ -12,7 +12,6 @@ pipeline {
             }
         }
 
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -21,14 +20,11 @@ pipeline {
             }
         }
 
-        stage('Unit Tests Python') {
+        stage('Test Asterisk Server') {
             steps {
                 script {
-                    // Run tests inside Docker container
-                    def testResult = sh(returnStatus: true, script: 'python3 Test/image_test.py')
-                    if (testResult != 0) {
-                        error 'Tests failed! Aborting pipeline...'
-                    }
+                    // Run tests inside a temporary Docker container
+                    sh "docker run --rm asterisk-image:latest python3 Test/image_test.py"
                 }
             }
         }

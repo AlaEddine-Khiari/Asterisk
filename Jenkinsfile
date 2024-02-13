@@ -54,11 +54,27 @@ pipeline {
             }
        }     
     }
-    post {
-        always {
-            // Send email notification
-            emailext(body: "", attachLog: true, subject: "Pipeline ${currentBuild.result}: ${env.JOB_NAME}", to: 'hyperrftw29@gmail.com')
-        }
-    }
- }
+   post {
+    always {
+        script {
+            def subject = "Build ${currentBuild.result}: ${env.JOB_NAME}"
+            def body = ""
 
+            if (currentBuild.result == 'SUCCESS') {
+                body += "The pipeline was successful.\n"
+                body += "Docker image was created successfully.\n"
+            } else {
+                body += "The pipeline failed.\n"
+                body += "Error: ${currentBuild.rawBuild.log}\n" // Include error message from Jenkins build log
+            }
+
+            emailext(
+                subject: subject,
+                body: body,
+                to: "khiarialaa@gmail.com",
+                from: "hyperrftw29@gmail.com"
+            )
+        }
+        cleanWs() // clean workspace
+    }
+}

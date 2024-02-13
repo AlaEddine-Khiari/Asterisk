@@ -15,7 +15,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                   sh "docker build -t asterisk-image:latest ."
+                   def dockerImage = docker.build("asterisk-image:latest", ".")
+                   // Check if dockerImage is null or an error occurred during the build
+                   if (dockerImage == null) {
+                       error "Docker image build failed"
+                   }
                 }
             }
         }
@@ -23,12 +27,14 @@ pipeline {
         stage('Copy Files from Container to Local Machine') {
             steps {
                 script {
-                    // Define the mount point for the container
                     def mountpoint = sh(script: "docker inspect --format='{{ range .Mounts }}{{ .Source }}{{ end }}' container_name", returnStdout: true).trim()
-                    
-                    // Copy the files from the volume mountpoint to the local machine
-                    sh "cp ${mountpoint}/sip.conf /home/vagrant/Asterisk_Volume"
-                    sh "cp ${mountpoint}/other_file.conf /home/vagrant/Asterisk_Volume"
+                    // Check if mountpoint is not empty before copying files
+                    if (mountpoint) {
+                        sh "cp ${mountpoint}/sip.conf /home/vagrant/Asterisk_Volume"
+                        sh "cp ${mountpoint}/other_file.conf /home/vagrant/Asterisk_Volume"
+                    } else {
+                        error "Failed to determine container mountpoint"
+                    }
                 }
             }
         }

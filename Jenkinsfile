@@ -32,11 +32,12 @@ pipeline {
             steps {
                 script {
                     // Execute Python script to test SIP module
-                    def scriptExitCode = sh(script: "python /home/vagrant/Asterisk/image_test.py", returnStatus: true)
+                    def scriptExitCode = sh(script: "python3 /home/vagrant/Asterisk/image_test.py", returnStatus: true)
 
                     // Handle script exit code
                     if (scriptExitCode != 0) {
                         error "Test Failed!"
+                       sh "docker rmi -f asterisk-image:latest"
                     }
                 }
             }

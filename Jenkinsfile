@@ -45,14 +45,7 @@ pipeline {
                 }
             }
         }
-
-        stage ('clean project'){
-             steps {
-                script {
-                        sh "rm -rf /home/vagrant/Asterisk" 
-                }
-            }
-       }     
+     
     }
     
     post {

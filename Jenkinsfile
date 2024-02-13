@@ -49,7 +49,7 @@ pipeline {
         stage ('clean project'){
              steps {
                 script {
-                        sh "rm -d /home/vagrant/Asterisk" 
+                        sh "rm -rf /home/vagrant/Asterisk" 
                 }
             }
        }     

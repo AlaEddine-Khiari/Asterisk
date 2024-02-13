@@ -23,20 +23,16 @@ COPY ./ari.conf /etc/asterisk/ari.conf
 COPY ./http.conf /etc/asterisk/http.conf
 COPY ./queues.conf /etc/asterisk/queues.conf
 COPY ./voicemail.conf /etc/asterisk/voicemail.conf
-COPY Test/image_test.py /app/Test/image_test.py
 
 # Expose Asterisk ports
 EXPOSE 5060/udp 5060/tcp 8088
-
-# Define volumes for Asterisk data directories
-VOLUME /var/lib/asterisk/sounds
 
 # Copy the Docker entrypoint script into the container root directory
 COPY docker-entrypoint.sh /
 
 # Set execute permissions on the entrypoint script
 RUN chmod +x /docker-entrypoint.sh
-RUN chmod +x /app/Test/image_test.py
+
 # Set the entrypoint for the container to the entrypoint script
 ENTRYPOINT ["/docker-entrypoint.sh"]
 

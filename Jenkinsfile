@@ -23,8 +23,8 @@ pipeline {
         stage('Copy Files from Container to Local Machine') {
             steps {
                 script {
-                        sh "cp sip.conf /home/vagrant/Asterisk_Volume"
-                        sh "cp other_file.conf /home/vagrant/Asterisk_Volume"
+                        sh "sudo cp sip.conf /home/vagrant/Asterisk_Volume"
+                        sh "sudo cp other_file.conf /home/vagrant/Asterisk_Volume"
                 }
             }
         }

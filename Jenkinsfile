@@ -35,7 +35,7 @@ pipeline {
                     def scriptExitCode = sh(script: "python3 /home/vagrant/Asterisk/image_test.py", returnStatus: true)
 
                     // Handle script exit code
-                    if (scriptExitCode != 0) {
+                    if (scriptExitCode == 0) {
                         sh "docker rmi -f asterisk-image"
                         error "Test Failed!"
                     }

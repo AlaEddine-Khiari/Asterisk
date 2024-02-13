@@ -24,9 +24,9 @@ COPY ./http.conf /etc/asterisk/http.conf
 COPY ./queues.conf /etc/asterisk/queues.conf
 COPY ./voicemail.conf /etc/asterisk/voicemail.conf
 COPY Test/image_test.py /app/Test/image_test.py
+
 # Expose Asterisk ports
-EXPOSE 5060/udp 5060/tcp
-EXPOSE 8088
+EXPOSE 5060/udp 5060/tcp 8088
 
 # Define volumes for Asterisk data directories
 VOLUME /var/lib/asterisk/sounds
@@ -41,4 +41,4 @@ RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Define default command to start Asterisk with verbose output
-CMD ["/usr/sbin/asterisk", "-vvvdddf", "-T", "-W", "-U", "asterisk", "-p"]
+CMD ["/usr/sbin/asterisk", "-T", "-W", "-U", "asterisk", "-p", "-vvvdddf"]

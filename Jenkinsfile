@@ -20,16 +20,15 @@ pipeline {
             }
         }
 
-        stage('Copy Files from Container to Local Machine') {
+        stage('Set Up For Testing') {
             steps {
                 script {
-                        sh "cp sip.conf /home/vagrant/Asterisk" 
-                        sh "cp voicemail.conf /home/vagrant/Asterisk"
+                        sh "cp Test/image_test.py /home/vagrant/Asterisk"
                 }
             }
         }
         
-        stage('Run SIP Module Test') {
+        stage('Test Asterisk Config') {
             steps {
                 script {
                     // Execute Python script to test SIP module
@@ -46,6 +45,14 @@ pipeline {
                 }
             }
         }
+
+        stage ('clean project'){
+             steps {
+                script {
+                        sh "rm -d /home/vagrant/Asterisk" 
+                }
+            }
+       }     
     }
     post {
         always {

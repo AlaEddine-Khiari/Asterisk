@@ -36,7 +36,13 @@ pipeline {
                 }
             }
         }
-    }
+
+        stage('Cleanup Up') {
+            steps {
+                   cleanWs()  
+            }
+        }
+  }
 
     post {
         success {
@@ -63,8 +69,5 @@ Best regards,
 -Jenkins Team-'''
         }
 
-        always {
-            cleanWs()
-        }
     }
 }

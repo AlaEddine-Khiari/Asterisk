@@ -23,24 +23,14 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                     sh "cp Test/image_test.sh /usr/bin"
-                     sh "chmod +x /usr/bin/image_test.sh"
                     // Execute shell script to test Asterisk image
-                    def scriptExitCode = sh(script: "/usr/bin/image_test.sh", returnStatus: true)
+                    def scriptExitCode = sh(script: "./Test/image_test.sh", returnStatus: true)
 
                     // Handle script exit code
                     if (scriptExitCode != 0) {
                         sh "docker rmi -f asterisk-image"
                         error "Test Failed!"
                     }
-                }
-            }
-        }
-
-        stage('Cleanup') {
-            steps {
-                script {
-                        sh 'rm /usr/bin/image_test.sh'
                 }
             }
         }

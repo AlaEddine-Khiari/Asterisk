@@ -6,6 +6,13 @@ docker run -d --name asterisk-cli \
     -v voicemail.conf:/etc/asterisk/voicemail.conf \
     asterisk-image
 
+# Check if the container started successfully
+if [ $? -ne 0 ]; then
+    echo "Failed to start Asterisk container"
+    exit 1
+fi
+
+echo "Asterisk container started successfully"
 
 # Wait for Asterisk to initialize
 sleep 10
@@ -15,9 +22,7 @@ cli_output=$(docker exec -it asterisk-cli /bin/sh -c "asterisk -rvvvv 2>&1")
 
 # Check if Asterisk CLI command was successful
 if [ $? -ne 0 ]; then
-    # If the Asterisk CLI command failed then exit
     echo "Asterisk CLI command failed"
-    exit 1  # Exit with status 1 to indicate failure
 fi
 
 # Stop and remove the container

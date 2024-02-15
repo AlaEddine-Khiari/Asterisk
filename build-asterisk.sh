@@ -120,11 +120,6 @@ chown -R asterisk:asterisk /etc/asterisk \
                            /usr/*/asterisk
 chmod -R 750 /var/spool/asterisk
 
-# Clean up
-cd /
-rm -rf /usr/src/asterisk \
-       /usr/src/codecs
-
 # Remove development packages and clean up
 devpackages=`dpkg -l|grep '\-dev'|awk '{print $2}'|xargs`
 DEBIAN_FRONTEND=noninteractive apt-get --yes purge \

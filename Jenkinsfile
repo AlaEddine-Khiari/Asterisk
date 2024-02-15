@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t asterisk-image:latest ."
+                    sh "docker build --no-cache -t asterisk-image:latest ."
                 }
             }
         }

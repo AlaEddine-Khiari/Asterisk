@@ -23,6 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    sh "chmod +x Test/image_test.sh"
                     // Execute shell script to test Asterisk image
                     def scriptExitCode = sh(script: "./Test/image_test.sh", returnStatus: true)
 

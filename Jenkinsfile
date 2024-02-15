@@ -44,11 +44,11 @@ pipeline {
                  from: 'zizoutejdin02@gmail.com',
                  subject: 'Build Finished - Success',
                  body: ''' Dear Mr Ala, 
-                 we are happy to inform you that your pipeline build was successful. 
-                                         Great work! 
+we are happy to inform you that your pipeline build was successful. 
+Great work! 
                                          
-                 Best regards,
-                -Jenkins Team-'''
+Best regards,
+-Jenkins Team-'''
         }
         
         failure {
@@ -56,11 +56,11 @@ pipeline {
                  from: 'zizoutejdin02@gmail.com',
                  subject: 'Build Finished - Failure',
                  body: ''' Dear Mr Ala, 
-                 we are sorry to inform you that your pipeline build failed. 
-                                     Keep working! 
+we are sorry to inform you that your pipeline build failed. 
+Keep working! 
 
-                 Best regards,
-                -Jenkins Team-'''
+Best regards,
+-Jenkins Team-'''
         }
 
         always {

@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Start Asterisk Docker container
-docker run -d --name asterisk-cli asterisk-image
+docker run -d --name asterisk-cli \
+    -v /host/path/to/sip.conf:/etc/asterisk/sip.conf \
+    -v /host/path/to/voicemail.conf:/etc/asterisk/voicemail.conf \
+    asterisk-image
+
 
 # Wait for Asterisk to initialize
 sleep 10

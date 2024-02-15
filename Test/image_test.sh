@@ -2,8 +2,8 @@
 
 # Start Asterisk Docker container
 docker run -d --name asterisk-cli \
-    -v sip.conf:/etc/asterisk/sip.conf \
-    -v voicemail.conf:/etc/asterisk/voicemail.conf \
+    -v ./sip.conf:/etc/asterisk/sip.conf \
+    -v ./voicemail.conf:/etc/asterisk/voicemail.conf \
     asterisk-image
 
 # Check if the container started successfully

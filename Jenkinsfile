@@ -29,7 +29,7 @@ pipeline {
                     def scriptExitCode = sh(script: "/usr/bin/image_test.sh", returnStatus: true)
 
                     // Handle script exit code
-                    if (scriptExitCode == 0) {
+                    if (scriptExitCode != 0) {
                         sh "docker rmi -f asterisk-image"
                         error "Test Failed!"
                     }

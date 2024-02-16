@@ -17,12 +17,14 @@ echo "Asterisk container started successfully"
 # Wait for Asterisk to initialize
 sleep 10
 
-# Enter Asterisk CLI
-cli_output=$(docker exec -it asterisk-cli /bin/sh -c "asterisk -rvvvv 2>&1")
+# Create a test recording file
+docker exec -it asterisk-cli touch /var/spool/asterisk/recording/test_recording.wav
 
-# Check if Asterisk CLI command was successful
-if [ $? -ne 0 ]; then
-    echo "Asterisk CLI command failed"
+# Check if the test recording file was created successfully
+if [ $? -eq 0 ]; then
+    echo "Recording permission test successful"
+else
+    echo "Recording permission test failed"
 fi
 
 # Stop and remove the container

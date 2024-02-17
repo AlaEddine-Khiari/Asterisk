@@ -119,6 +119,8 @@ chown -R asterisk:asterisk /etc/asterisk \
                            /var/*/asterisk \
                            /usr/*/asterisk
 chmod -R 750 /var/spool/asterisk
+chmod -R 750 /var/spool/asterisk/recording
+chmod +x /var/lib/asterisk/agi-bin/call_forward.py
 
 # Clean up
 cd /

@@ -18,6 +18,7 @@ useradd --system asterisk
 # Update package lists and install required dependencies
 apt-get update -qq
 DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+    python3\
     autoconf \
     binutils-dev \
     build-essential \

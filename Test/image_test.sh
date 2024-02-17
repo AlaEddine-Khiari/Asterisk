@@ -18,7 +18,7 @@ echo "Asterisk container started successfully"
 sleep 10
 
 # Create a test recording file
-docker exec -it asterisk-cli sh -c "touch /var/spool/asterisk/recording/test_recording.wav && ls /var/spool/asterisk/recording"
+docker exec  asterisk-cli sh -c "touch /var/spool/asterisk/recording/test_recording.wav && ls /var/spool/asterisk/recording"
 
 # Check if the test recording file was created successfully
 if [ $? -eq 0 ]; then
@@ -30,7 +30,7 @@ else
 fi
 
 # Test call forwarding by executing the existing call_forward.py script inside the container
-docker exec -it asterisk-cli sh -c /var/lib/asterisk/agi-bin/call_forward.py 100
+docker exec  asterisk-cli sh -c /var/lib/asterisk/agi-bin/call_forward.py 100
 if [ $? -eq 0 ]; then
     echo "Call forwarding test successful"
 else

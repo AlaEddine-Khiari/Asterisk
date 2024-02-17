@@ -120,10 +120,6 @@ chown -R asterisk:asterisk /etc/asterisk \
                            /usr/*/asterisk
 chmod -R 750 /var/spool/asterisk
 chmod -R 750 /var/spool/asterisk/recording
-chmod -R 750 /var/lib/asterisk/agi-bin
-
-#xxxx
-pip install asterisk
 
 # Clean up
 cd /

@@ -25,6 +25,7 @@ if [ $? -eq 0 ]; then
     echo "Recording permission test successful"
 else
     echo "Recording permission test failed"
+    docker rm -f asterisk-cli
     exit 1
 fi
 
@@ -34,9 +35,10 @@ if [ $? -eq 0 ]; then
     echo "Call forwarding test successful"
 else
     echo "Call forwarding test failed"
+    docker rm -f asterisk-cli
     exit 1
 fi
 
 # Stop and remove the container
 docker stop asterisk-cli
-docker rm asterisk-cli
+docker rm -f asterisk-cli

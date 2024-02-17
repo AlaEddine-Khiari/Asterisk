@@ -38,7 +38,6 @@ COPY docker-entrypoint.sh /
 
 # Set execute permissions on the entrypoint script
 RUN chmod +x /docker-entrypoint.sh
-RUN chmod +x /var/lib/asterisk/agi-bin/call_forward.py
 
 # Set the entrypoint for the container to the entrypoint script
 ENTRYPOINT ["/docker-entrypoint.sh"]

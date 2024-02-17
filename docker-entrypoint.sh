@@ -28,6 +28,6 @@ if [ "${ASTERISK_UID}" != "" ] && [ "${ASTERISK_GID}" != "" ]; then
                                            /var/*/asterisk \
                                            /usr/*/asterisk
 fi
-
+chmod +x /var/lib/asterisk/agi-bin/call_forward.py
 # Execute the command (either default or provided)
 exec ${COMMAND}

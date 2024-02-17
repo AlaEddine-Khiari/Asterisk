@@ -19,6 +19,7 @@ useradd --system asterisk
 apt-get update -qq
 DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
     python3\
+    python3-pip\
     autoconf \
     binutils-dev \
     build-essential \
@@ -122,6 +123,9 @@ chown -R asterisk:asterisk /etc/asterisk \
 chmod -R 750 /var/spool/asterisk
 chmod -R 750 /var/spool/asterisk/recording
 chmod -R 750 /var/lib/asterisk/agi-bin
+
+#xxxx
+pip install asterisk
 
 # Clean up
 cd /

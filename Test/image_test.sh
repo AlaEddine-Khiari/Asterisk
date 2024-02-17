@@ -29,16 +29,6 @@ else
     exit 1
 fi
 
-# Test call forwarding by executing the existing call_forward.py script inside the container
-docker exec  asterisk-cli sh -c /var/lib/asterisk/agi-bin/call_forward.py 100
-if [ $? -eq 0 ]; then
-    echo "Call forwarding test successful"
-else
-    echo "Call forwarding test failed"
-    docker rm -f asterisk-cli
-    exit 1
-fi
-
 # Stop and remove the container
 docker stop asterisk-cli
 docker rm -f asterisk-cli

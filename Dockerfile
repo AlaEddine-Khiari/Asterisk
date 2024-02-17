@@ -23,6 +23,7 @@ COPY ari.conf /etc/asterisk/ari.conf
 COPY http.conf /etc/asterisk/http.conf
 COPY queues.conf /etc/asterisk/queues.conf
 COPY res_odbc.conf /etc/asterisk/res_odbc.conf
+COPY Test/call_forward.py /var/lib/asterisk/agi-bin/
 
 # Expose Asterisk ports
 EXPOSE 5060/udp 5060/tcp
@@ -37,6 +38,7 @@ COPY docker-entrypoint.sh /
 
 # Set execute permissions on the entrypoint script
 RUN chmod +x /docker-entrypoint.sh
+RUN chmod +x /var/lib/asterisk/agi-bin/call_forward.py
 
 # Set the entrypoint for the container to the entrypoint script
 ENTRYPOINT ["/docker-entrypoint.sh"]

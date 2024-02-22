@@ -89,10 +89,6 @@ menuselect/menuselect --disable BUILD_NATIVE menuselect.makeopts
 menuselect/menuselect --enable BETTER_BACKTRACES menuselect.makeopts
 menuselect/menuselect --enable chan_ooh323 menuselect.makeopts
 
-# Disable unnecessary features
-menuselect/menuselect --disable-category MENUSELECT_CORE_SOUNDS menuselect.makeopts
-menuselect/menuselect --disable-category MENUSELECT_MOH menuselect.makeopts
-menuselect/menuselect --disable-category MENUSELECT_EXTRA_SOUNDS menuselect.makeopts
 
 # Compile Asterisk
 make -j ${JOBS} all

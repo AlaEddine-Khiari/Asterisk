@@ -118,8 +118,7 @@ chmod -R 750 /var/spool/asterisk/recording
 
 # Clean up
 cd /
-rm -rf /usr/src/asterisk \
-       /usr/src/codecs
+rm -rf /usr/src/asterisk 
 
 # Remove development packages and clean up
 devpackages=`dpkg -l|grep '\-dev'|awk '{print $2}'|xargs`

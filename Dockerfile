@@ -27,7 +27,6 @@ COPY rtp.conf /etc/asterisk/rtp.conf
 
 # Expose Asterisk ports
 EXPOSE 5060/udp 5060/tcp
-EXPOSE 10000-10099/udp
 EXPOSE 8088
 
 # Define volumes 

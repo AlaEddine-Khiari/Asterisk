@@ -50,8 +50,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-i
     xmlstarlet \
     locales
 
-# Configure locales for French (change 'fr_FR.UTF-8' to the desired locale)
-echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
+# Configure locales for French in Tunisia
+echo "fr_TN.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 
 # Clean up after installation
@@ -88,9 +88,6 @@ menuselect/menuselect --disable BUILD_NATIVE menuselect.makeopts
 # Enable necessary features
 menuselect/menuselect --enable BETTER_BACKTRACES menuselect.makeopts
 menuselect/menuselect --enable chan_ooh323 menuselect.makeopts
-# Disable unnecessary features
-menuselect/menuselect --disable-category MENUSELECT_MOH menuselect.makeopts
-menuselect/menuselect --disable-category MENUSELECT_EXTRA_SOUNDS menuselect.makeopts
 
 # Compile Asterisk
 make -j ${JOBS} all

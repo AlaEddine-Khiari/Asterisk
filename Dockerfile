@@ -27,7 +27,7 @@ COPY res_odbc.conf /etc/asterisk/res_odbc.conf
 # Expose Asterisk ports
 EXPOSE 5060/udp 5060/tcp
 EXPOSE 8088
-EXPOSE 10000-20000/udp
+EXPOSE 10000-10099/udp
 # Define volumes 
 VOLUME /etc/asterisk/sip.conf
 VOLUME /etc/asterisk/voicemail.conf

@@ -23,7 +23,6 @@ COPY ari.conf /etc/asterisk/ari.conf
 COPY http.conf /etc/asterisk/http.conf
 COPY queues.conf /etc/asterisk/queues.conf
 COPY res_odbc.conf /etc/asterisk/res_odbc.conf
-COPY rtp.conf /etc/asterisk/rtp.conf
 
 # Expose Asterisk ports
 EXPOSE 5060/udp 5060/tcp

@@ -71,9 +71,6 @@ curl -vsL http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk
 curl -vsL http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-${ASTERISK_VERSION}.tar.gz | tar --strip-components 1 -xz || \
 curl -vsL http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-${ASTERISK_VERSION}.tar.gz | tar --strip-components 1 -xz
 
-# Calculate number of jobs for parallel compilation
-: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
-
 # Build Asterisk with menu selections
 make menuselect/menuselect menuselect-tree menuselect.makeopts
 
@@ -86,6 +83,9 @@ menuselect/menuselect --enable chan_ooh323 menuselect.makeopts
 menuselect/menuselect --enable-category MENUSELECT_CORE_SOUNDS menuselect.makeopts
 menuselect/menuselect --enable-category MENUSELECT_MOH menuselect.makeopts
 menuselect/menuselect --enable-category MENUSELECT_EXTRA_SOUNDS menuselect.makeopts
+
+# Calculate number of jobs for parallel compilation
+: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
 
 # Configure Asterisk build with required options
 ./configure --with-resample \

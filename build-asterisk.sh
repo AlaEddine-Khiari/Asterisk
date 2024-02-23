@@ -88,7 +88,6 @@ menuselect/menuselect --disable BUILD_NATIVE menuselect.makeopts
 # Enable necessary features
 menuselect/menuselect --enable BETTER_BACKTRACES menuselect.makeopts
 menuselect/menuselect --enable chan_ooh323 menuselect.makeopts
-menuselect/menuselect --enable-category MENUSELECT_CORE_SOUNDS menuselect.makeopts
 # Disable unnecessary features
 menuselect/menuselect --disable-category MENUSELECT_MOH menuselect.makeopts
 menuselect/menuselect --disable-category MENUSELECT_EXTRA_SOUNDS menuselect.makeopts

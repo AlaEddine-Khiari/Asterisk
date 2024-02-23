@@ -50,8 +50,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-i
     xmlstarlet \
     locales
 
-# Configure locales for Tunisia (Tunisian Arabic)
-echo "ar_TN.UTF-8 UTF-8" >> /etc/locale.gen
+# Configure locales for French (change 'fr_FR.UTF-8' to the desired locale)
+echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 
 # Clean up after installation
@@ -71,6 +71,14 @@ curl -vsL http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk
 curl -vsL http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-${ASTERISK_VERSION}.tar.gz | tar --strip-components 1 -xz || \
 curl -vsL http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-${ASTERISK_VERSION}.tar.gz | tar --strip-components 1 -xz
 
+# Calculate number of jobs for parallel compilation
+: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
+
+# Configure Asterisk build with required options
+./configure --with-resample \
+            --with-pjproject-bundled \
+            --with-jansson-bundled
+
 # Build Asterisk with menu selections
 make menuselect/menuselect menuselect-tree menuselect.makeopts
 
@@ -80,17 +88,10 @@ menuselect/menuselect --disable BUILD_NATIVE menuselect.makeopts
 # Enable necessary features
 menuselect/menuselect --enable BETTER_BACKTRACES menuselect.makeopts
 menuselect/menuselect --enable chan_ooh323 menuselect.makeopts
+
 menuselect/menuselect --enable-category MENUSELECT_CORE_SOUNDS menuselect.makeopts
 menuselect/menuselect --enable-category MENUSELECT_MOH menuselect.makeopts
 menuselect/menuselect --enable-category MENUSELECT_EXTRA_SOUNDS menuselect.makeopts
-
-# Calculate number of jobs for parallel compilation
-: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
-
-# Configure Asterisk build with required options
-./configure --with-resample \
-            --with-pjproject-bundled \
-            --with-jansson-bundled
 
 # Compile Asterisk
 make -j ${JOBS} all

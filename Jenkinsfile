@@ -36,6 +36,13 @@ pipeline {
                 }
             }
         }
+        stage('login dockerhub') {
+                steps {
+				        sh 'docker login -u alaeddinekh --password dckr_pat_EkLSF6l04M02rFWSzu3WjP_QL48'
+                        sh 'docker push alaeddinekh/asterisk-image:latest'
+                      }
+		  }
+        
 
         stage('Cleanup Up') {
             steps {

@@ -36,13 +36,15 @@ pipeline {
                 }
             }
         }
-        stage('Push Image To Dockerhub') {
-                steps {
-				        sh 'docker login -u alaeddinekh --password dckr_pat_EkLSF6l04M02rFWSzu3WjP_QL48'
-                        sh 'docker push alaeddinekh/asterisk-image:latest'
-                      }
-		  }
-        
+	    
+	stage('Push Image To Dockerhub') {
+   	 steps {
+        	withCredentials([usernamePassword(credentialsId: 'docker_id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+            	sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+            	sh "docker push alaeddinekh/asterisk-image:latest"
+        	}
+   	 }
+	}
 
         stage('Cleanup Up') {
             steps {

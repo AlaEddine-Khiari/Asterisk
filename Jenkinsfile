@@ -30,7 +30,7 @@ pipeline {
 
                     // Handle script exit code
                     if (scriptExitCode != 0) {
-                        sh "docker rmi -f asterisk-image"
+                        sh "docker rmi -f alaeddinekh/asterisk-image"
                         error "Test Failed!"
                     }
                 }

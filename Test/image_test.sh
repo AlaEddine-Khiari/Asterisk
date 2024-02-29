@@ -4,7 +4,7 @@
 docker run -d --name asterisk-cli \
     -v ./sip.conf:/etc/asterisk/sip.conf \
     -v ./voicemail.conf:/etc/asterisk/voicemail.conf \
-    asterisk-image
+    alaeddinekh/asterisk-image
 
 # Check if the container started successfully
 if [ $? -ne 0 ]; then

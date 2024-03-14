@@ -23,10 +23,13 @@ COPY ari.conf /etc/asterisk/ari.conf
 COPY http.conf /etc/asterisk/http.conf
 COPY queues.conf /etc/asterisk/queues.conf
 COPY res_odbc.conf /etc/asterisk/res_odbc.conf
+COPY cdr_custom.conf /etc/asterisk/cdr_custom.conf
+COPY manger.conf /etc/asterisk/manager.conf
 
 # Expose Asterisk ports
 EXPOSE 5060/udp 5060/tcp
 EXPOSE 10000-20000/udp
+EXPOSE 5038
 EXPOSE 8088
 
 # Define volumes 

@@ -106,13 +106,17 @@ mkdir -p /usr/src/codecs/opus \
   && cp *.so /usr/lib/asterisk/modules/ \
   && cp codec_opus_config-en_US.xml /var/lib/asterisk/documentation/
 
+#Create file for call details
+touch /var/log/asterisk/cdr-custom/Simple.csv
+chmod 750 /var/log/asterisk/cdr-custom/Simple.csv
+
 # Create directories and set permissions
 mkdir -p /etc/asterisk/ \
          /var/spool/asterisk/fax
-
 chown -R asterisk:asterisk /etc/asterisk \
                            /var/*/asterisk \
-                           /usr/*/asterisk
+                           /usr/*/asterisk \
+                           /var/log/asterisk/cdr-custom/Simple.csv
 chmod -R 750 /var/spool/asterisk
 chmod -R 750 /var/spool/asterisk/recording
 
